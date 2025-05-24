@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Campus Shuttle Hub</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans">
+
+  <!-- Navbar -->
+  <header id="navbar" class="bg-blue-800 text-white p-4 flex justify-between items-center hidden">
+    <h1 class="text-xl font-bold">Campus Shuttle Hub</h1>
+    <nav class="space-x-4">
+      <button onclick="showPage('homePage')">Home</button>
+      <button onclick="showPage('routesPage')">Plan Route</button>
+      <button onclick="showPage('adminPage')">Admin</button>
+      <button onclick="showPage('loginPage')">Logout</button>
+    </nav>
+  </header>
+
+  <!-- Login Page -->
+  <div id="loginPage" class="page p-6 flex justify-center items-center min-h-screen">
+    <div class="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
+      <div class="flex justify-center mb-4">
+        <!-- شعار الجامعة الأردنية فقط هنا -->
+        <img src="University_of_Jordan_Logo.svg.png" alt="JU Logo" class="w-16 h-16" />
+      </div>
+      <h2 class="text-2xl font-bold mb-4 text-center">Login</h2>
+      <form class="space-y-4" onsubmit="login(event)">
+        <div>
+          <label class="block mb-1 font-medium">Email</label>
+          <input type="email" placeholder="you@example.com" class="w-full p-2 border rounded" required />
+        </div>
+        <div>
+          <label class="block mb-1 font-medium">Password</label>
+          <input type="password" placeholder="••••••••" class="w-full p-2 border rounded" required />
+        </div>
+        <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">Log In</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Home Page -->
+  <div id="homePage" class="page hidden p-6">
+    <h2 class="text-2xl font-semibold mb-4">Live Bus Map</h2>
+    <div class="w-full h-64 rounded-lg mb-6 overflow-hidden shadow-lg">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3384.6459115425573!2d35.86805867538085!3d32.01244021976916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151c9f1e6c7b182b%3A0x47fbb9bb25595f34!2z2YXYr9mK2YXYs9iq2Kog2KfZhNi52LHYqQ!5e0!3m2!1sar!2sjo!4v1716554381600!5m2!1sar!2sjo"
+        width="100%"
+        height="100%"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        class="border-0 w-full h-full"
+      ></iframe>
+    </div>
+
+    <h3 class="text-xl font-semibold mb-2">Today's Timetable</h3>
+    <table class="w-full bg-white rounded-lg shadow-md overflow-hidden">
+      <thead class="bg-blue-100">
+        <tr>
+          <th class="p-2 text-left">Route</th>
+          <th class="p-2 text-left">Start Time</th>
+          <th class="p-2 text-left">End Time</th>
+          <th class="p-2 text-left">Frequency</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="border-t">
+          <td class="p-2">Gate A - Science Faculty</td>
+          <td class="p-2">08:00</td>
+          <td class="p-2">17:00</td>
+          <td class="p-2">Every 15 mins</td>
+        </tr>
+        <tr class="border-t">
+          <td class="p-2">Gate B - Engineering Faculty</td>
+          <td class="p-2">08:30</td>
+          <td class="p-2">18:00</td>
+          <td class="p-2">Every 20 mins</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Route Planner Page -->
+  <div id="routesPage" class="page hidden p-6">
+    <h2 class="text-2xl font-semibold mb-4">Plan Your Route</h2>
+    <form class="bg-white p-4 rounded-lg shadow space-y-4">
+      <div>
+        <label class="block mb-1">From:</label>
+        <select class="w-full p-2 border rounded">
+          <option>Gate A</option>
+          <option>Gate B</option>
+          <option>Gate C</option>
+        </select>
+      </div>
+      <div>
+        <label class="block mb-1">To:</label>
+        <select class="w-full p-2 border rounded">
+          <option>Science Faculty</option>
+          <option>Engineering Faculty</option>
+          <option>Library</option>
+        </select>
+      </div>
+      <button type="button" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Find Route</button>
+    </form>
+  </div>
+
+  <!-- Admin Page -->
+  <div id="adminPage" class="page hidden p-6">
+    <h2 class="text-2xl font-semibold mb-4">Admin Dashboard</h2>
+    <form class="bg-white p-4 rounded-lg shadow space-y-4">
+      <div>
+        <label class="block mb-1">New Route Name:</label>
+        <input type="text" class="w-full p-2 border rounded" placeholder="e.g. Gate D - Business Faculty" />
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block mb-1">Start Time:</label>
+          <input type="time" class="w-full p-2 border rounded" />
+        </div>
+        <div>
+          <label class="block mb-1">End Time:</label>
+          <input type="time" class="w-full p-2 border rounded" />
+        </div>
+      </div>
+      <div>
+        <label class="block mb-1">Frequency (mins):</label>
+        <input type="number" class="w-full p-2 border rounded" />
+      </div>
+      <button type="button" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Add Route</button>
+    </form>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    function showPage(pageId) {
+      document.querySelectorAll('.page').forEach(page => page.classList.add('hidden'));
+      document.getElementById(pageId).classList.remove('hidden');
+      if (pageId === 'loginPage') {
+        document.getElementById('navbar').classList.add('hidden');
+      } else {
+        document.getElementById('navbar').classList.remove('hidden');
+      }
+    }
+
+    function login(event) {
+      event.preventDefault();
+      document.getElementById('loginPage').classList.add('hidden');
+      document.getElementById('navbar').classList.remove('hidden');
+      document.getElementById('homePage').classList.remove('hidden');
+    }
+  </script>
+
+</body>
+</html>
