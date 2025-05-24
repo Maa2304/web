@@ -1,469 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
-    <title>The Study</title>
-    <style>
-        /* الإعدادات القديمة تبقى كما هي */
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(to right, #ffffff, #a5abe2);
-            margin: 0;
-            padding: 0;
-            color: #333;
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            flex-direction: column;
-        }
-
-        header {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: white;
-            color: white;
-            padding: 30px;
-            width: 100%;
-            border-bottom: 3px solid #f9f9f9;
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            max-width: 1200px;
-            padding: 10px;
-        }
-
-        .left-s {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .site-name {
-            font-size: 24px;
-            font-weight: bold;
-            color: #333;
-        }
-        
-        .icons-container {
-            display: flex;
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .icon {
-            font-size: 36px;
-            color: #686D9C;
-            transition: color 0.3s;
-        }
-
-        .icon:hover {
-            color: #7b3a62;
-        }
-
-        .motivational-text {
-            width: 100%;
-            background-color: #cf0e0e;
-            color: white;
-            font-size: 40px;
-            font-weight: bold;
-            padding: 20px;
-            white-space: nowrap;
-            overflow: hidden;
-            position: relative;
-            text-align: center;
-            margin-bottom: 15px;
-            height: 80px;
-        }
-
-        .motivational-text span {
-            position: absolute;
-            animation: scrolling 15s linear infinite;
-            padding-left: 100%;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
-        }
-
-        .nav-links {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
-
-        .nav-link {
-            padding: 12px 25px;
-            color: white;
-            background: #934B8F;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: all 0.3s;
-            font-size: 18px;
-        }
-
-        .nav-link:hover {
-            background: #7b3a62;
-            transform: scale(1.05);
-        }
-
-        .search-container {
-            margin: 20px;
-            padding: 10px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .search-container input {
-            padding: 10px;
-            font-size: 16px;
-            width: 80%;
-            max-width: 400px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
-        .content-container {
-            display: none;
-            padding: 40px;
-            background: rgba(255, 255, 255, 0.9);
-            margin-top: 30px;
-            border-radius: 10px;
-            text-align: center;
-            max-width: 800px;
-            width: 100%;
-        }
-
-        .home-container {
-            padding: 60px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.8);
-        }
-
-        .home-container img {
-            width: 80%;
-            max-width: 1000px;
-            margin-bottom: 30px;
-        }
-
-        .quote {
-            font-size: 32px;
-            font-weight: bold;
-            color: #333;
-            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
-            margin-bottom: 30px;
-            max-width: 80%;
-        }
-
-        button {
-            background: #934B8F;
-            color: white;
-            border: none;
-            padding: 18px 36px;
-            font-size: 22px;
-            cursor: pointer;
-            margin: 20px;
-            border-radius: 8px;
-            transition: all 0.3s;
-        }
-
-        button:hover {
-            background: #7b3a62;
-        }
-
-        .video-thumbnail {
-            width: 60%;
-            max-width: 200px;
-            height: auto;
-            border-radius: 8px;
-        }
-
-        .video-list {
-            display: none;
-            margin-top: 20px;
-            text-align: left;
-        }
-
-        .video-list .video-container {
-            cursor: pointer;
-            margin-bottom: 10px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Campus Shuttle Hub</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body onload="showContent('home')">
-    <header>
-        <div class="header-content">
-            <div class="left-s">
-                <img src="icons8-happy-study-48.png" alt="CIS Icon"/>
-				<span class="site-name">Maali Mohammed Al-salamat</span>
-                <span>CIS JU</span>
-            </div>
-            <div class="icons-container">
-                <span class="material-icons icon">laptop_chromebook</span>
-                <span class="material-icons icon">code</span>
-                <span class="material-icons icon">storage</span>
-                <span class="material-icons icon">phone_android</span>
-                <span class="material-icons icon">cloud_queue</span>
-                <span class="material-icons icon">wifi</span>
-                <span class="material-icons icon">bluetooth</span>
-                <span class="M-name">CIS JU</span>
-            </div>
+<body class="bg-gray-100 text-gray-800 font-sans">
+
+  <!-- Navbar -->
+  <header id="navbar" class="bg-blue-800 text-white p-4 flex justify-between items-center hidden">
+    <h1 class="text-xl font-bold">Campus Shuttle Hub</h1>
+    <nav class="space-x-4">
+      <button onclick="showPage('homePage')">Home</button>
+      <button onclick="showPage('routesPage')">Plan Route</button>
+      <button onclick="showPage('adminPage')">Admin</button>
+      <button onclick="showPage('loginPage')">Logout</button>
+    </nav>
+  </header>
+
+  <!-- Login Page -->
+  <div id="loginPage" class="page p-6 flex justify-center items-center min-h-screen">
+    <div class="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
+      <div class="flex justify-center mb-4">
+        <!-- شعار الجامعة الأردنية فقط هنا -->
+        <img src="University_of_Jordan_Logo.svg.png" alt="JU Logo" class="w-16 h-16" />
+      </div>
+      <h2 class="text-2xl font-bold mb-4 text-center">Login</h2>
+      <form class="space-y-4" onsubmit="login(event)">
+        <div>
+          <label class="block mb-1 font-medium">Email</label>
+          <input type="email" placeholder="you@example.com" class="w-full p-2 border rounded" required />
         </div>
-        <div class="motivational-text">
-            <span>Believe in yourself and all that you are.</span>
-            <span>The future belongs to those who believe in the beauty of their dreams.</span>
+        <div>
+          <label class="block mb-1 font-medium">Password</label>
+          <input type="password" placeholder="••••••••" class="w-full p-2 border rounded" required />
         </div>
-        <div class="nav-links">
-            <a href="javascript:void(0)" class="nav-link" onclick="showContent('home')"><span class="material-icons">home</span> Home</a>
-            <a href="javascript:void(0)" class="nav-link" onclick="showContent('about')"><span class="material-icons">info</span> About</a>
-            <a href="javascript:void(0)" class="nav-link" onclick="showContent('videos')"><span class="material-icons">video_library</span> Videos</a>
-            <a href="uploads/documents/sample.pdf" class="nav-link" download><span class="material-icons">File</span> File</a>
+        <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">Log In</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Home Page -->
+  <div id="homePage" class="page hidden p-6">
+    <h2 class="text-2xl font-semibold mb-4">Live Bus Map</h2>
+    <div class="w-full h-64 rounded-lg mb-6 overflow-hidden shadow-lg">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3384.6459115425573!2d35.86805867538085!3d32.01244021976916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151c9f1e6c7b182b%3A0x47fbb9bb25595f34!2z2YXYr9mK2YXYs9iq2Kog2KfZhNi52LHYqQ!5e0!3m2!1sar!2sjo!4v1716554381600!5m2!1sar!2sjo"
+        width="100%"
+        height="100%"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        class="border-0 w-full h-full"
+      ></iframe>
+    </div>
+
+    <h3 class="text-xl font-semibold mb-2">Today's Timetable</h3>
+    <table class="w-full bg-white rounded-lg shadow-md overflow-hidden">
+      <thead class="bg-blue-100">
+        <tr>
+          <th class="p-2 text-left">Route</th>
+          <th class="p-2 text-left">Start Time</th>
+          <th class="p-2 text-left">End Time</th>
+          <th class="p-2 text-left">Frequency</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="border-t">
+          <td class="p-2">Gate A - Science Faculty</td>
+          <td class="p-2">08:00</td>
+          <td class="p-2">17:00</td>
+          <td class="p-2">Every 15 mins</td>
+        </tr>
+        <tr class="border-t">
+          <td class="p-2">Gate B - Engineering Faculty</td>
+          <td class="p-2">08:30</td>
+          <td class="p-2">18:00</td>
+          <td class="p-2">Every 20 mins</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Route Planner Page -->
+  <div id="routesPage" class="page hidden p-6">
+    <h2 class="text-2xl font-semibold mb-4">Plan Your Route</h2>
+    <form class="bg-white p-4 rounded-lg shadow space-y-4">
+      <div>
+        <label class="block mb-1">From:</label>
+        <select class="w-full p-2 border rounded">
+          <option>Gate A</option>
+          <option>Gate B</option>
+          <option>Gate C</option>
+        </select>
+      </div>
+      <div>
+        <label class="block mb-1">To:</label>
+        <select class="w-full p-2 border rounded">
+          <option>Science Faculty</option>
+          <option>Engineering Faculty</option>
+          <option>Library</option>
+        </select>
+      </div>
+      <button type="button" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Find Route</button>
+    </form>
+  </div>
+
+  <!-- Admin Page -->
+  <div id="adminPage" class="page hidden p-6">
+    <h2 class="text-2xl font-semibold mb-4">Admin Dashboard</h2>
+    <form class="bg-white p-4 rounded-lg shadow space-y-4">
+      <div>
+        <label class="block mb-1">New Route Name:</label>
+        <input type="text" class="w-full p-2 border rounded" placeholder="e.g. Gate D - Business Faculty" />
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block mb-1">Start Time:</label>
+          <input type="time" class="w-full p-2 border rounded" />
         </div>
-        <div class="search-container">
-            <input type="text" id="videoSearch" onkeyup="searchVideos()" placeholder="Search for videos...">
+        <div>
+          <label class="block mb-1">End Time:</label>
+          <input type="time" class="w-full p-2 border rounded" />
         </div>
-    </header>
+      </div>
+      <div>
+        <label class="block mb-1">Frequency (mins):</label>
+        <input type="number" class="w-full p-2 border rounded" />
+      </div>
+      <button type="button" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Add Route</button>
+    </form>
+  </div>
 
-    <!-- Content sections -->
-    <section class="content-container" id="home-content" style="display: block;">
-        <div class="home-container">
-            <img id="home-image" src="w.png" alt="CIS Image">
-            <p class="quote">“Education is the most powerful weapon which you can use to change the world.”</p>
-            <button onclick="showContent('about')">About CIS at JU</button>
-            <button onclick="showContent('aboutCreator')">About  Site engineer</button>
-        </div>
-    </section>
+  <!-- Scripts -->
+  <script>
+    function showPage(pageId) {
+      document.querySelectorAll('.page').forEach(page => page.classList.add('hidden'));
+      document.getElementById(pageId).classList.remove('hidden');
+      if (pageId === 'loginPage') {
+        document.getElementById('navbar').classList.add('hidden');
+      } else {
+        document.getElementById('navbar').classList.remove('hidden');
+      }
+    }
 
-    <section id="about-content" class="content-container">
-        <h2>About</h2>
-        <p class="quote">“Perhaps what you insist on is destined for you”</p>
-        <p>The Computer Information Systems (CIS) major is one of the most important majors in information and computer technology...</p>
-    </section>
+    function login(event) {
+      event.preventDefault();
+      document.getElementById('loginPage').classList.add('hidden');
+      document.getElementById('navbar').classList.remove('hidden');
+      document.getElementById('homePage').classList.remove('hidden');
+    }
+  </script>
 
-    <section id="aboutCreator-content" class="content-container">
-        <h2>About Site engineer </h2>
-        <p>Maali Mohammad Al-Salamat, student at King Abdullah II College of Information Technology, University of Jordan...</p>
-    </section>
-
-    <section id="videos-content" class="content-container">
-        <h2>Video Playlist</h2>
-        <div class="video-section">
-            <!-- عند الضغط على صورة الفيديو، ستظهر قائمة الفيديوهات -->
-            <div class="video-container" onclick="toggleVideoList()">
-                <img class="video-thumbnail" src="MMM.jpg" alt="Video 1">
-                <p>Click to view Image Processing course</p>
-            </div>
-            
-
-            <!-- قائمة الفيديوهات (مخفية في البداية) -->
-            <div id="videoList" class="video-list">
-                <div class="video-container" onclick="redirectToVideo('video1')">
-                    <p>Chapter 2 Digital Image Fundamentals</p>
-                </div>
-                <div class="video-container" onclick="redirectToVideo('video2')">
-                    <p>Chapter 2 Image Interpolation
-                    </p>
-                </div>
-                <div class="video-container" onclick="redirectToVideo('video3')">
-                    <p>
-                       
-               
-        
-                        Chapter 2 Pixel's Relationships</p>
-                </div>
-                <div class="video-container" onclick="redirectToVideo('video4')">
-                    <p>
-                        Chapter 2 Regions and Distance Measures
-               </p>
-                </div> <div class="video-container" onclick="redirectToVideo('video5')">
-                    <p>
-                        Chapter 2 MATLAB 
-               
-        </p><hr>
-                </div> <div class="video-container" onclick="redirectToVideo('video6')">
-                    <p>
-        
-                        Chapter 3 Basic Intensity Transformation Function</p>
-                </div>
-                <div class="video-container" onclick="redirectToVideo('video7')">
-                    <p>
-                        Chapter 3 Contrast Stretching and Thresholding
-                    </p>
-                </div><div class="video-container" onclick="redirectToVideo('video8')">
-                    <p>Chapter 3 Histogram Equalization
-                    </p>
-                </div><div class="video-container" onclick="redirectToVideo('video9')">
-                    <p>Chapter 3 Slicing
-                    </p>
-                </div><div class="video-container" onclick="redirectToVideo('video10')">
-                    <p>Chapter 3 Assignment 2
-                    </p><hr>
-                </div><div class="video-container" onclick="redirectToVideo('video11')">
-                    <p>Ch4 Frequency Transform 1
-                    </p>
-                </div><div class="video-container" onclick="redirectToVideo('video12')">
-                    <p>Ch4 Frequency Transform 2
-                    </p>
-                </div><div class="video-container" onclick="redirectToVideo('video13')">
-                    <p>Ch4 Frequency Transform 3
-                    </p>
-                </div><div class="video-container" onclick="redirectToVideo('video14')">
-                    <p>Ch4 Frequency Transform 4
-                    </p>
-                </div><div class="video-container" onclick="redirectToVideo('video15')">
-                    <p>Ch4 Frequency Transform 5
-                    </p>
-                </div><div class="video-container" onclick="redirectToVideo('video16')">
-                    <p>Ch4 Frequency Transform 6
-                    </p>
-                </div><div class="video-container" onclick="redirectToVideo('video17')">
-                    <p>Assignment Freq transform
-                    </p><hr>
-                </div><div class="video-container" onclick="redirectToVideo('video18')">
-                    <p>Ch6 Color 1
-
-                    </p>
-                </div><div class="video-container" onclick="redirectToVideo('video19')">
-                    <p>Ch6 Color 2
-                    </p>
-                </div><div class="video-container" onclick="redirectToVideo('video20')">
-                    <p>ch6 Color 3
-
-                    </p>
-                </div>
-                <div class="video-container" onclick="redirectToVideo('video21')">
-                    <p>Ch6 Color 4
-
-                    </p>
-                </div><div class="video-container" onclick="redirectToVideo('video22')">
-                    <p>Ch6 Color 5
-                    </p><hr>
-                </div><div class="video-container" onclick="redirectToVideo('video20')">
-                    <p>Chapter 2 Image Interpolation
-                    </p>
-                </div><div class="video-container" onclick="redirectToVideo('video20')">
-                    <p>Chapter 2 Image Interpolation
-                    </p>
-                </div><div class="video-container" onclick="redirectToVideo('video20')">
-                    <p>Chapter 2 Image Interpolation
-                    </p>
-                </div><div class="video-container" onclick="redirectToVideo('video20')">
-                    <p>Chapter 2 Image Interpolation
-                    </p>
-                </div><div class="video-container" onclick="redirectToVideo('video20')">
-                    <p>Chapter 2 Image Interpolation
-                    </p>
-                </div> <div class="video-container" onclick="redirectToVideo('video20')">
-                    <p>Chapter 2 Image Interpolation
-                    </p>
-                </div><div class="video-container" onclick="redirectToVideo('video20')">
-                    <p>Chapter 2 Image Interpolation
-                    </p>
-                </div><div class="video-container" onclick="redirectToVideo('video20')">
-                    <p>Chapter 2 Image Interpolation
-                    </p>
-                </div><div class="video-container" onclick="redirectToVideo('video20')">
-                    <p>Chapter 2 Image Interpolation
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <script>
-        function showContent(content) {
-            const sections = document.querySelectorAll('.content-container');
-            sections.forEach(section => section.style.display = 'none');
-            document.getElementById(content + '-content').style.display = 'block';
-        }
-
-        function toggleVideoList() {
-            const videoList = document.getElementById("videoList");
-            videoList.style.display = (videoList.style.display === "block") ? "none" : "block";
-        }
-
-        function redirectToVideo(videoId) {
-            let videoUrl;
-            if (videoId === 'video1') {
-                videoUrl = 'https://youtu.be/KonmrkrwFME?si=GJNFsMBZivZGyN9v';
-            } else if (videoId === 'video2') {
-                videoUrl = 'https://youtu.be/h07_iP2oOYY?si=lN14jqPT0piUoRQ6';
-            } else if (videoId === 'video3') {
-                videoUrl = 'https://youtu.be/oI7TzSCgVBg?si=JsmK0aBfw38qu7Jw';
-            }else if (videoId === 'video4') {
-                videoUrl = 'https://youtu.be/pxiIS9fUzWw?si=Pj8MuScZK8MaHUej';
-            }else if (videoId === 'video5') {
-                videoUrl = 'https://youtu.be/sqliWB3RPy4?si=7a356fWAcLA0_Qut';
-            }else if (videoId === 'video6') {
-                videoUrl = 'https://youtu.be/yxgh6mT0HWE?si=tfxEh2XcqPBVWuY1';
-            }
-            else if (videoId === 'video7') {
-                videoUrl = 'https://youtu.be/8FZJFT-0L0Y?si=nSxheoIpKHL7thAp';
-            }else if (videoId === 'video8') {
-                videoUrl = 'https://youtu.be/5-7xskk3aeo?si=TRYtgRiX4Ky33s0n';
-            }else if (videoId === 'video9') {
-                videoUrl = 'https://youtu.be/wOw79o4OFc8?si=jO50OixqeO6euOED';
-            }else if (videoId === 'video10') {
-                videoUrl = 'https://youtu.be/gYczYdsTxBs?si=bkbn20HWy2gMdFFd';
-            }else if (videoId === 'video11') {
-                videoUrl = 'https://youtu.be/r6_56BGSooo?si=z9Z8B06Di20sPFcI';
-            }else if (videoId === 'video12') {
-                videoUrl = 'https://youtu.be/wCA_qK8-QGs?si=psvAXrEk72Q4cGSr';
-            }else if (videoId === 'video13') {
-                videoUrl = 'https://youtu.be/ZV155RYdrZ8?si=fYKJ50Wnfs4B5M6e';
-            }else if (videoId === 'video14') {
-                videoUrl = 'https://youtu.be/AF36YFTTquo?si=KBLrXESeqrqZ2Z5J';
-            }else if (videoId === 'video15') {
-                videoUrl = 'https://youtu.be/IqWxjzkApWM?si=N86t1SkmCJGWOjuz';
-            }else if (videoId === 'video16') {
-                videoUrl = 'https://youtu.be/HCf5zcqEB1g?si=8waTBkrf9I2DiLcU';
-            }else if (videoId === 'video17') {
-                videoUrl = 'https://youtu.be/hNwBuXmUEBs?si=bDfStiHr79MprMIU';
-            }else if (videoId === 'video18') {
-                videoUrl = 'https://youtu.be/ENKbqhNT_es?si=VPMwA_pegwghIktS';
-            }else if (videoId === 'video19') {
-                videoUrl = 'https://youtu.be/MaVCgPCpw8o?si=0b4wPrkq4xNeu1Qu';
-            }else if (videoId === 'video20') {
-                videoUrl = 'https://youtu.be/LYgT4FqjaO8?si=nH0Rf3eUQPoKNYEk';
-            }
-            else if (videoId === 'video21') {
-                videoUrl = 'https://youtu.be/XlLqnV3DlCE?si=GGeLL2U_FJmQO18y';
-            }else if (videoId === 'video22') {
-                videoUrl = 'https://youtu.be/aj7pYSHvjHE?si=8gTinXMj1eiwmmqb';
-            }else if (videoId === 'video23') {
-                videoUrl = 'https://youtu.be/yxgh6mT0HWE?si=tfxEh2XcqPBVWuY1';
-            }else if (videoId === 'video20') {
-                videoUrl = 'https://youtu.be/yxgh6mT0HWE?si=tfxEh2XcqPBVWuY1';
-            }else if (videoId === 'video20') {
-                videoUrl = 'https://youtu.be/yxgh6mT0HWE?si=tfxEh2XcqPBVWuY1';
-            }else if (videoId === 'video20') {
-                videoUrl = 'https://youtu.be/yxgh6mT0HWE?si=tfxEh2XcqPBVWuY1';
-            }else if (videoId === 'video20') {
-                videoUrl = 'https://youtu.be/yxgh6mT0HWE?si=tfxEh2XcqPBVWuY1';
-            }else if (videoId === 'video20') {
-                videoUrl = 'https://youtu.be/yxgh6mT0HWE?si=tfxEh2XcqPBVWuY1';
-            }else if (videoId === 'video20') {
-                videoUrl = 'https://youtu.be/yxgh6mT0HWE?si=tfxEh2XcqPBVWuY1';
-            }else if (videoId === 'video20') {
-                videoUrl = 'https://youtu.be/yxgh6mT0HWE?si=tfxEh2XcqPBVWuY1';
-            }else if (videoId === 'video20') {
-                videoUrl = 'https://youtu.be/yxgh6mT0HWE?si=tfxEh2XcqPBVWuY1';
-            }
-            window.open(videoUrl, '_blank');
-        }
-    </script>
 </body>
 </html>
